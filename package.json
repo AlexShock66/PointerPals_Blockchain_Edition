@@ -1,0 +1,28 @@
+{
+  "name": "my-nft",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AlexShock66/PointerPals_Blockchain_Edition.git"
+  },
+  "author": "Alexander Shockley, Jay Kynerd",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AlexShock66/PointerPals_Blockchain_Edition/issues"
+  },
+  "homepage": "https://github.com/AlexShock66/PointerPals_Blockchain_Edition#readme",
+  "devDependencies": {
+    "@nomiclabs/hardhat-ethers": "^2.2.1",
+    "ethers": "^5.0.0",
+    "hardhat": "^2.12.3"
+  },
+  "dependencies": {
+    "@openzeppelin/contracts": "^4.8.0",
+    "dotenv": "^16.0.3"
+  }
+}
