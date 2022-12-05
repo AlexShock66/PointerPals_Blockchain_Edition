@@ -1,0 +1,16 @@
+{
+    "attributes": [
+      {
+        "trait_type": "Breed",
+        "value": "stupid dog"
+      },
+      {
+        "trait_type": "Eye color",
+        "value": "stupid"
+      }
+    ],
+    "description": "The world's most adorable and sensitive pup.",
+    "image": "ipfs://QmUfxx4aKJ9qso4e7sqrXnKWQm8Qkqt9ELpFzF7jDfp2fR",
+    "name": "Piper"
+  }
+  
