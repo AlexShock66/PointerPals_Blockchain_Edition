@@ -9,7 +9,7 @@ const endpoint = '//localhost:4000'
 function App() {
 
   const [file, setFile] = useState(undefined);
-
+  // 
   return (
     <FormControl>
       <Button variant="contained" component="label">
@@ -21,9 +21,10 @@ function App() {
       <Button variant='contained' type="button" onClick={() => {
         console.log(file.name.split('.')[1]);
         const filename = `../public/data.${file.name.split('.')[1]}`;
-
-        axios.post(`${endpoint}/nft`, {body: {name: 'fuck'}}, { headers: {
-          'Content-Type': file.type
+        const formData = new FormData();
+        formData.append('file', file);
+        axios.post(`${endpoint}/nft`, formData, { headers: {
+          "Content-Type":"multipart/form-data"
         }})
         }}>Submit</Button>
     </FormControl>
