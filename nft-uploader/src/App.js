@@ -2,7 +2,9 @@ import logo from "./logo.svg";
 import "./App.css";
 import { Button, FormControl } from "@mui/material";
 import { useState } from "react";
-const fs = require('fs');
+import axios from 'axios';
+
+const endpoint = '//localhost:4000'
 
 function App() {
 
@@ -17,8 +19,12 @@ function App() {
       <label htmlFor="name">Name</label>
       <input type="text" id="name"></input>
       <Button variant='contained' type="button" onClick={() => {
-        console.log(file);
-        window.localStorage.setItem('file', JSON.stringify(file));
+        console.log(file.name.split('.')[1]);
+        const filename = `../public/data.${file.name.split('.')[1]}`;
+
+        axios.post(`${endpoint}/nft`, {body: {name: 'fuck'}}, { headers: {
+          'Content-Type': file.type
+        }})
         }}>Submit</Button>
     </FormControl>
   );
