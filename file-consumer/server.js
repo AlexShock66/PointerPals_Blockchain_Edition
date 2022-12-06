@@ -60,7 +60,38 @@ const pinFileToIPFS = async (filename,filepath) => {
   }
 }
 
-
+const uploadJson = async (name,filePath) => {
+  var data = JSON.stringify({
+    "pinataOptions": {
+      "cidVersion": 1
+    },
+    "pinataMetadata": {
+      "name": "testing",
+      "keyvalues": {
+        "customKey": "customValue",
+        "customKey2": "customValue2"
+      }
+    },
+    "pinataContent": {
+      "somekey": "somevalue"
+    }
+  });
+  
+  var config = {
+    method: 'post',
+    url: 'https://api.pinata.cloud/pinning/pinJSONToIPFS',
+    headers: { 
+      'Content-Type': 'application/json', 
+      'Authorization': JWT
+    },
+    data : data
+  };
+  
+  const res = await axios(config);
+  
+  // console.log(res.data);
+  return res;
+}
 
 app.post('/nft', (req, res) => {
     console.log('i am here');
@@ -78,8 +109,13 @@ app.post('/nft', (req, res) => {
       fs.rename( file.path, savedFileName.concat('.',extension),function (err) {
         if (err) throw err;
         console.log('File Renamed.');
-        pinFileToIPFS(file.originalname,savedFileName.concat('.',extension)).then( (data) => {
+        pinFileToIPFS(file.originalname,savedFileName.concat('.',extension)).then((data) => {
             console.log(data)
+            uploadJson("yurr","DoesntMatter").then( (response) => {
+                console.log(response.data)
+            }).catch( (e) => {
+              console.log(e);
+            })
         })
       });
       // const prevUrl = req.body.prevUrl.slice(21)
