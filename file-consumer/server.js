@@ -69,10 +69,10 @@ const uploadJson = async (name, hash) => {
     },
     "pinataMetadata": {
       "name": `${name}-metadata.json`,
-      // "keyvalues": {
-      //   "customKey": "customValue",
-      //   "customKey2": "customValue2"
-      // }
+      "keyvalues": {
+        "customKey": "customValue",
+        "customKey2": "customValue2"
+      }
     },
     "pinataContent": {
       "name": name,
@@ -102,7 +102,7 @@ app.post('/nft', (req, res) => {
     // fs.readFile(req.files.file.path, function(err, data){
     //   console.log(data)
     // });
-    upload(req,res, (err) => {
+    upload(req, res, (err) => {
       const file = req.file
       console.log(file)
       const extension = file.originalname.split('.')[1]
@@ -114,12 +114,12 @@ app.post('/nft', (req, res) => {
         pinFileToIPFS(file.originalname,savedFileName.concat('.',extension)).then((data) => {
             console.log(data)
             uploadJson(req.headers.name, data.IpfsHash).then( (response) => {
-                mintNFT.mintNFT(`ipfs://${response.data.IpfsHash}`).then( res => {
-                  console.log(res);
+                mintNFT.mintNFT(`ipfs://${response.data.IpfsHash}`, req.headers.public_key, req.headers.private_key).then(data => {
+                  res.status(200).json(data);
                 });
-                console.log(response.data)
+                // console.log(response.data)
             }).catch( (e) => {
-              console.log(e);
+              alert(e);
             })
         })
       });
