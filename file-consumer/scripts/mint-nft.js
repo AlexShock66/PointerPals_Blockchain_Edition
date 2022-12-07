@@ -6,7 +6,7 @@ const PRIVATE_KEY = process.env.PRIVATE_KEY;
 const { createAlchemyWeb3 } = require("@alch/alchemy-web3")
 const web3 = createAlchemyWeb3(API_URL)
 
-const contract = require("../artifacts/contracts/MyNFT.sol/MyNFT.json")
+const contract = require("../../artifacts/contracts/MyNFT.sol/MyNFT.json")
 // console.log(contract.abi)
 const contractAddress = '0xd6727d4d17409797b08504ad9fe1f51475b35240';
 const nftContract = new web3.eth.Contract(contract.abi, contractAddress);
@@ -33,8 +33,9 @@ async function mintNFT(tokenURI) {
               console.log(
                 "The hash of your transaction is: ",
                 hash,
-                "\nCheck Alchemy's Mempool to view the status of your transaction!"
+                "\nCheck Alchemy's Mempool to view the status of your transaction!",
               )
+              console.log(nonce);
             } else {
               console.log(
                 "Something went wrong when submitting your transaction:",
@@ -49,4 +50,4 @@ async function mintNFT(tokenURI) {
       })
 }
 
-mintNFT('ipfs://QmVoqEqcqG8ZNSMELnSU5Trpc2NBXVPw7CsvNAdTkAmaHD');
+module.exports = { mintNFT }
